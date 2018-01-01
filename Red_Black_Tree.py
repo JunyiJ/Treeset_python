@@ -28,6 +28,9 @@ class RedBlackTree(object):
 	def __init__(self):
 		self.root = None
 		
+	def isempty(self):
+		return self.root is None
+		
 	def _search_insert(self, treenode, key, val):
 		# normal BST insert
 		# Return newnode if balancing is needed
@@ -214,6 +217,10 @@ class RedBlackTree(object):
 		else:
 			return self._search(node.right, key)
 			
+	def search(self, key):
+		# return the node with key if exists otherwise return None
+		return self._search(self.root, key)	
+			
 	def delete_key(self, key):
 		node = self._search(self.root, key)
 		if not node:
@@ -285,8 +292,7 @@ class RedBlackTree(object):
 				s.color = 1
 				
 	
-	def del_recolor(self, s, ps):
-		
+	def del_recolor(self, s, ps):		
 		if s:
 			s.color = 0
 		if ps.color:
@@ -306,6 +312,48 @@ class RedBlackTree(object):
 			s.left.color = 0
 			self.del_recolor(s.left.right)
 			
+	def first(self):
+		# return the smallest node if exist otherwise return None
+		node = self.root
+		while node and node.left:
+			node = node.left
+		return node
+		
+	def last(self):
+		# return node with minkey if exist otherwise return None
+		node = self.root
+		while node and node.right:
+			node = node.right
+		return node
+		
+	def subSet(self, fromkey, tokey):
+		# return node within range [fromkey, tokey)
+		stack, res, node = [], [], None
+		if fromkey >= tokey:
+			return res
+		cur = self.root
+		while cur:			
+			if fromkey == cur.key:
+				stack.append(cur)
+				break
+			if fromkey < cur.key:
+				stack.append(cur)
+				cur = cur.left
+			else:				
+				cur = cur.right
+		while stack or node:
+			if node:
+				stack.append(node)
+				node = node.left
+			else:
+				topnode = stack.pop()
+				if topnode.key >= tokey:
+					return res
+				res.append(topnode)
+				node = topnode.right
+		return res
+		
+		
 			
 	def print_tree_bfs(self):
 		queue = [self.root]
