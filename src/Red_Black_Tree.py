@@ -1,4 +1,4 @@
-# RED: 0, BLACK:1, doubleBlack:2
+# RED: 0, BLACK:1
 class Node(object):
 
 	def __init__(self, key, val):
@@ -21,7 +21,7 @@ class Node(object):
 		color = "R"
 		if self.color:
 			color = "B"
-		print str(self.key)+"("+color+")",
+		print "%d(%s)" % (self.key, color),
 		
 class RedBlackTree(object):
 
@@ -55,7 +55,8 @@ class RedBlackTree(object):
 				newnode.parent = treenode
 				return newnode
 				
-	def insert(self, key, val):		
+	def insert(self, key, val):	
+		# insert or update (key, val)
 		if not self.root:
 			self.root = Node(key, val)
 			self.root.color = 1			
@@ -84,104 +85,8 @@ class RedBlackTree(object):
 		if uncle:
 			uncle.color = 1
 		node.parent.parent.color = 0
-		return node.parent.parent
-		
-	def left_rotate_p(self, node):
-		'''
-		left rotate p
-					g                g
-				   / \              / \
-				  p   u            x   u
-				 / \       -->    / \
-				T1  x             p  T3
-				   / \           / \
-				   T2 T3        T1  T2
-		'''
-		x, g, p= node.right, node.parent, node
-		T2 = x.left
-		g.left = x
-		x.parent = g
-		x.left = p
-		p.parent = x
-		p.right = T2
-		if T2:
-			T2.parent = p		
-		
-	def right_rotate_g(self, node):
-		'''
-		right rotate g
-					g                p
-				   / \              /  \
-				  p   u            x    g
-				 / \       -->    / \   /\
-			     x  T3           T1 T2 T3 u
-				/ \           
-			   T1 T2        
-		'''
-		p, g, x = node.left, node, node.left.left
-		T3 = p.right
-		p.right = g
-		g.left = T3
-		if T3:
-			T3.parent = g
-		pg = g.parent
-		if pg:
-			if pg.left is g:
-				pg.left = p
-			else:
-				pg.right = p
-		p.parent = pg
-		g.parent = p
-		if g is self.root:
-			self.root = p
-		
-	def right_rotate_p(self, node):
-		'''
-		right rotate p
-			    g                g
-			   / \              / \
-			  u   p            u   x 
-				 / \       -->    / \
-			    x  T5           T3  p
-				/ \                 / \
-			   T3 T4               T4  T5
-		'''
-		x, p, g = node.left, node, node.parent
-		T4 = x.right
-		g.right = x
-		x.parent = g
-		x.right = p
-		p.parent = x
-		p.left = T4
-		if T4:
-			T4.parent = p
-		
-	def left_rotate_g(self, node):
-		'''
-		left rotate g
-				g                p
-			   / \              / \
-			  u    p            g   x 
-			 / \  / \  -->     / \
-		    T1 T2 T3 x        u   T3
-				             / \
-				            T1  T2
-		'''
-		g, p, x = node, node.right, node.right.right
-		T3 = p.left
-		p.left = g
-		g.right = T3
-		if T3:
-			T3.parent = g
-		if g.parent:
-			if g.parent.left is g:
-				g.parent.left = p
-			if g.parent.right is g:
-				g.parent.right = p
-		p.parent = g.parent
-		g.parent = p
-		if g is self.root:
-			self.root = p
+		return node.parent.parent		
+	
 			
 	def _rotation(self, node):
 		# left left case: p is left kid of g and x is left kid of p
@@ -291,6 +196,102 @@ class RedBlackTree(object):
 				s.parent.color = 1
 				s.color = 1
 				
+	def left_rotate_p(self, node):
+		'''
+		left rotate p
+					g                g
+				   / \              / \
+				  p   u            x   u
+				 / \       -->    / \
+				T1  x             p  T3
+				   / \           / \
+				   T2 T3        T1  T2
+		'''
+		x, g, p= node.right, node.parent, node
+		T2 = x.left
+		g.left = x
+		x.parent = g
+		x.left = p
+		p.parent = x
+		p.right = T2
+		if T2:
+			T2.parent = p		
+		
+	def right_rotate_g(self, node):
+		'''
+		right rotate g
+					g                p
+				   / \              /  \
+				  p   u            x    g
+				 / \       -->    / \   /\
+			     x  T3           T1 T2 T3 u
+				/ \           
+			   T1 T2        
+		'''
+		p, g, x = node.left, node, node.left.left
+		T3 = p.right
+		p.right = g
+		g.left = T3
+		if T3:
+			T3.parent = g
+		pg = g.parent
+		if pg:
+			if pg.left is g:
+				pg.left = p
+			else:
+				pg.right = p
+		p.parent = pg
+		g.parent = p
+		if g is self.root:
+			self.root = p
+		
+	def right_rotate_p(self, node):
+		'''
+		right rotate p
+			    g                g
+			   / \              / \
+			  u   p            u   x 
+				 / \       -->    / \
+			    x  T5           T3  p
+				/ \                 / \
+			   T3 T4               T4  T5
+		'''
+		x, p, g = node.left, node, node.parent
+		T4 = x.right
+		g.right = x
+		x.parent = g
+		x.right = p
+		p.parent = x
+		p.left = T4
+		if T4:
+			T4.parent = p
+		
+	def left_rotate_g(self, node):
+		'''
+		left rotate g
+				g                p
+			   / \              / \
+			  u    p            g   x 
+			 / \  / \  -->     / \
+		    T1 T2 T3 x        u   T3
+				             / \
+				            T1  T2
+		'''
+		g, p, x = node, node.right, node.right.right
+		T3 = p.left
+		p.left = g
+		g.right = T3
+		if T3:
+			T3.parent = g
+		if g.parent:
+			if g.parent.left is g:
+				g.parent.left = p
+			if g.parent.right is g:
+				g.parent.right = p
+		p.parent = g.parent
+		g.parent = p
+		if g is self.root:
+			self.root = p				
 	
 	def del_recolor(self, s, ps):		
 		if s:
@@ -305,12 +306,12 @@ class RedBlackTree(object):
 			self.right_rotate_g(s.parent)
 			s.color = 1
 			s.right.color = 0
-			self.del_recolor(s.right.left)			
+			self.del_recolor(s.right.left, s.right)			
 		else:
 			self.left_rotate_g(s.parent)
 			s.color = 1
 			s.left.color = 0
-			self.del_recolor(s.left.right)
+			self.del_recolor(s.left.right, s.left)
 			
 	def first(self):
 		# return the smallest node if exist otherwise return None
@@ -352,8 +353,6 @@ class RedBlackTree(object):
 				res.append(topnode)
 				node = topnode.right
 		return res
-		
-		
 			
 	def print_tree_bfs(self):
 		queue = [self.root]

@@ -15,6 +15,10 @@ class TreeSet(object):
 				raise TypeError("element should be in (key, val) pair")
 			key, val = element
 			self.add(key, val)
+			
+	def remove(self, key):
+		# delete key if exists
+		self.rbtree.delete_key(key)
 	
 	def clear(self):
 		#remove all elements
@@ -53,6 +57,8 @@ class TreeSet(object):
 		
 	def print_tree(self):
 		self.rbtree.print_tree_bfs()
+		
+
 		
 
 

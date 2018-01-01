@@ -39,6 +39,9 @@ The TreeSet class has the following available methods:
 `addAll(elements)`: add all (key, val) pairs in elements to TreeSet
 
 
+`remove(key)`: remove key from TreeSet if exists
+
+
 `clear()`: reset the TreeSet to be empty
 
 
