@@ -8,9 +8,11 @@
 
 ## Prerequisites
 
+
 Python 2
 
 ## Aim
+
 
 A lot of real life problems require to keep and update certain record in an ordered way.
 One example is to use a data structure to store stock names and stock prices coming as a stream.
@@ -26,6 +28,7 @@ Here I implemented red black tree and TreeSet in python and provides the commonl
 
 
 ## How-to-use
+
 
 The TreeSet class has the following available methods:
 
@@ -62,6 +65,8 @@ The TreeSet class has the following available methods:
 
 
 ## Implementation-details
+
+
 coming soon.
 Please refer the source code for now.
 
