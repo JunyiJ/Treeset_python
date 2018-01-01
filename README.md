@@ -28,15 +28,19 @@ Here I implemented red black tree and TreeSet in python and provides the commonl
 ## How to use
 
 The TreeSet class has the following available methods:
+
+
 `add(key, val)`: add specified (key, val) pair to TreeSet
-addAll(elements): add all (key, val) pairs in elements to TreeSet
-clear(): reset the TreeSet to be empty
-contains(key): return True if key is found in TreeSet
-first(): return the (key, val) with key be the smallest of all keys is exists. Otherwise return None
-last(): return the (key, val) with key be the largest of all keys is exists. Otherwise return None
-headSet(tokey): return (key, val) pairs which are less than tokey
-tailSet(fromkey): return (key, val) pairs which are greater or equal to fromkey
-subSet(self, fromkey, tokey): return (key, val) pairs within range [fromkey, tokey)
+
+
+`addAll(elements)`: add all (key, val) pairs in elements to TreeSet
+`clear()`: reset the TreeSet to be empty
+`contains(key)`: return True if key is found in TreeSet
+`first()`: return the (key, val) with key be the smallest of all keys is exists. Otherwise return None
+`last()`: return the (key, val) with key be the largest of all keys is exists. Otherwise return None
+`headSet(tokey)`: return (key, val) pairs which are less than tokey
+`tailSet(fromkey)`: return (key, val) pairs which are greater or equal to fromkey
+`subSet(self, fromkey, tokey)`: return (key, val) pairs within range [fromkey, tokey)
 
 
 
