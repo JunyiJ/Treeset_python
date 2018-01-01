@@ -25,7 +25,7 @@ standard library.
 Here I implemented red black tree and TreeSet in python and provides the commonly used method as it is in Java.
 
 
-## How to use
+## How-to-use
 
 The TreeSet class has the following available methods:
 
@@ -61,7 +61,7 @@ The TreeSet class has the following available methods:
 
 
 
-## Implementation details
+## Implementation-details
 coming soon.
 Please refer the source code for now.
 
