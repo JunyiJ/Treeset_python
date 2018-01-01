@@ -15,12 +15,6 @@ class Node(object):
 		uncle = self.parent.parent.right
 		if self.parent is uncle:
 			uncle = self.parent.parent.left
-		'''
-		if uncle:
-			print "uncle of %d is %d" %(self.key, uncle.key)
-		else:
-			print "uncle of %d is None" %(self.key)
-		'''
 		return uncle
 		
 	def printnode(self):
@@ -70,6 +64,7 @@ class RedBlackTree(object):
 			self.balance(newnode)
 			
 	def balance(self, node):
+		# deal with double red after insertion
 		while node is not self.root and node.color == 0 and node.parent.color == 0:
 			uncle = node.get_uncle()
 			if uncle and not uncle.color:
@@ -144,7 +139,7 @@ class RedBlackTree(object):
 			   / \              / \
 			  u   p            u   x 
 				 / \       -->    / \
-			     x  T5           T3  p
+			    x  T5           T3  p
 				/ \                 / \
 			   T3 T4               T4  T5
 		'''
@@ -248,6 +243,7 @@ class RedBlackTree(object):
 			self.reduce_double_black(None, pnode)
 			
 	def reduce_double_black(self, node, pnode):	
+		# deal with double black case after deletion
 		if node is self.root:
 			return
 		s = pnode.left
@@ -325,8 +321,7 @@ class RedBlackTree(object):
 			queue = tmp
 			
 			
-	
-tree = RedBlackTree()
+
 		
 		
 		
