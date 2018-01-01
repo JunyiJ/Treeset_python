@@ -243,9 +243,7 @@ class RedBlackTree(object):
 				node.parent.left = None
 			else:
 				node.parent.right = None
-		if (predecessor and predecessor.color == 0) or node.color == 0:
-			node.color = 0
-		else:
+		if (not predecessor or predecessor.color) and node.color:
 			# double black case
 			self.reduce_double_black(None, pnode)
 			
@@ -277,8 +275,7 @@ class RedBlackTree(object):
 				self.print_tree()
 				self.left_rotate_g(s.parent.parent)
 				s.parent.color = 1
-				s.color = 1
-				
+				s.color = 1		
 				
 		else:
 			if (s.left and s.right and s.left.color == 0 and s.right.color == 0) or (s.left and s.left.color == 0):
@@ -314,7 +311,7 @@ class RedBlackTree(object):
 			self.del_recolor(s.left.right)
 			
 			
-	def print_tree(self):
+	def print_tree_bfs(self):
 		queue = [self.root]
 		while queue:
 			tmp = []
@@ -330,12 +327,6 @@ class RedBlackTree(object):
 			
 	
 tree = RedBlackTree()
-
-for i in range(1, 21):
-	tree.insert(i,i)
-tree.print_tree()
-tree.delete_key(2)
-tree.print_tree()
 		
 		
 		
